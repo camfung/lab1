@@ -1,3 +1,7 @@
+document.getElementById("redirectBtn").addEventListener("click", function() {
+	window.location.href = "/index.html";
+});
+
 // gpt generated i hate dealing with dates it very annoying
 function getCurrentTime() {
 	const now = new Date();
