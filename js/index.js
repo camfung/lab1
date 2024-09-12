@@ -22,17 +22,17 @@ function getLocalStorage() {
 }
 
 class Todo {
-	static idCounter = 0
 	constructor(note, id) {
 		if (id === undefined) {
-			this.id = Todo.idCounter;
+			this.id = parseInt(getLocalStorage().getItem("todoId"))
+			getLocalStorage().setItem("todoId", this.id + 1)
 		} else {
 			this.id = id
 		}
-		++Todo.idCounter
 		this.dateWritten = new Date();
 		this.deleted = false;
-		this.note = note;
+		this.note = note || "";
+
 	}
 }
 
@@ -66,6 +66,9 @@ class TodoHandler {
 		for (let i = 0; i < getLocalStorage().length; i++) {
 			let key = getLocalStorage().key(i);
 			let value = getLocalStorage().getItem(key);
+			if (key === "todoId") {
+				continue
+			}
 			console.log(value)
 			const todo = JSON.parse(value);
 			this.todos[todo.id] = new Todo(todo.note, todo.id)
@@ -75,6 +78,10 @@ class TodoHandler {
 
 class WindowHandler {
 	constructor(writable) {
+		const todoId = getLocalStorage().getItem("todoId")
+		if (todoId === null) {
+			getLocalStorage().setItem("todoId", 0)
+		}
 		this.todoHandler = new TodoHandler()
 		this.isWriter = writable
 
