@@ -16,7 +16,7 @@ function getCurrentTime() {
 // any time i access local storage i update the last updated display
 function getLocalStorage() {
 	const lastUpdatedElem = document.getElementById("lastUpdated")
-	lastUpdatedElem.innerHTML = "Last updated at " + getCurrentTime()
+	lastUpdatedElem.innerHTML = strings.lastUpdatedAt + getCurrentTime()
 
 	return localStorage
 }
