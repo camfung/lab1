@@ -48,12 +48,14 @@ class TodoHandler {
 		const strTodo = JSON.stringify(newTodo)
 		getLocalStorage().setItem(newTodo.id, strTodo)
 		this.todos[newTodo.id] = newTodo;
+		return newTodo.id
 	}
 
 	deleteTodo(index) {
 		delete this.todos[index]
 		getLocalStorage().removeItem(index.toString())
 	}
+
 	updateTodo(id, note) {
 		this.todos[id].note = note
 		const strTodo = JSON.stringify(this.todos[id])
@@ -163,9 +165,8 @@ class WindowHandler {
 		this.renderTodos()
 	}
 	addTodo() {
-		const todo = new Todo();
-		this.todoHandler.addTodo("")
-		this.addTodoToDom("", todo.id)
+		const id = this.todoHandler.addTodo()
+		this.addTodoToDom("", id)
 	}
 }
 
