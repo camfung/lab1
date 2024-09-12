@@ -106,9 +106,11 @@ class WindowHandler {
 		const noteTextarea = document.createElement('textarea');
 		noteTextarea.className = 'form-control';
 		noteTextarea.value = note;
-		noteTextarea.rows = 3; // Optional: You can set the number of visible text rows
+		noteTextarea.rows = 3;
+		noteTextarea.disabled = true
 		if (this.isWriter) {
 
+			noteTextarea.disabled = false
 			noteTextarea.addEventListener('input', (event) => {
 				const newNote = event.target.value;
 				this.updateTodo(id, newNote);
